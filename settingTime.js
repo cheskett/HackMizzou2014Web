@@ -28,3 +28,14 @@ ng.ready( function() {
     console.log(my_timepicker);
     
 });
+
+$(function() {
+    $("#save").click( function()
+        {
+            console.log();
+            console.log(ng.get('my_timepicker_input'));
+            console.log(ng.get('my_timepicker_input').value);
+            console.log(document.getElementById('my_timepicker_input').value);
+        }
+    );
+});
