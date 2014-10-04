@@ -7,16 +7,31 @@
 
         <script type="text/javascript" src="lib/TimePicker1.2.2/ng_all.js"></script>
 		<script type="text/javascript" src="lib/TimePicker1.2.2/components/timepicker.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="lib/datetimepicker-master/jquery.datetimepicker.css"/ >
+		<script src="lib/datetimepicker-master/jquery.js"></script>
+		<script src="lib/datetimepicker-master/jquery.datetimepicker.js"></script>
 
 
         <script src="settingTime.js"></script>
         <link rel='stylesheet' type='text/css' href='/resources/tutorial/css/example.css'>
         </head>
         <body>
-        	
-        <div id='messagesDiv'></div>
-        <input type='text' id='drugName' placeholder='Drug Name'>
-        <input type="text" id="my_timepicker_input" name="my_timepicker_input" placeholder='Time'>
-        <button type = 'submit' id='save'>Save</button>
+		
+		<div class="input_drugs_wrap">
+			<div class="input_times_wrap"></div>
+			<button class="add_drug_button">Add Drug</button>
+			<button class="add_time_button">Add Time</button>
+			<div class="input_drugs_wrap_drugnames">
+			
+				<div class="input_drugs_wrap_times">
+			
+			
+				</div>
+			</div>
+		</div>
+		
+		<button type = 'submit' id='save'>Save</button>
+		
         </body>
 </html>
