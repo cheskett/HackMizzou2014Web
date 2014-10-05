@@ -1,0 +1,20 @@
+.indent {
+	margin-left:210px;
+}
+.inputMargin {
+	margin: 5px;
+	width: 200px;
+}
+.margin {
+	margin: 5px;
+}
+.inline {
+	display: inline;
+}
+
+.tableSize {
+	width:200px;
+	height: 400px;
+	overflow: auto;
+}
+

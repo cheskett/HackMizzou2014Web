@@ -1,28 +1,15 @@
 
+var myList = [
+    {"name": "john", "time": "1:00"},
+    {"name": "pete", "time": "1:00"},
+    {"name": "will", "time": "1:00"},
+    {"name": "josh", "time": "1:00"}
+];
+
 var myDataRef = new Firebase('https://tt1gfbgrp6u.firebaseio-demo.com/');
 var drugNum = 0;
+var pageName;
 //myDataRef.remove();
-
-myDataRef.on('child_added', function(snapshot) {
-    var message = snapshot.val();
-    displayChatMessage(message.name, message.time);
-});
-
-function displayChatMessage(name, time) {
-    $('<div/>').text(time).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
-    //$('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
-};
-
-ng.ready( function() {
-	$('.my_timepicker_input').each(function () {
-    var my_timepicker = new ng.TimePicker({
-        input:'my_timepicker_input'
-    });
-    console.log(ng.get('my_timepicker_input'));
-    console.log(my_timepicker);
-	});
-    
-});
 
 $(function() {
     $("#save").click( function()
@@ -38,10 +25,23 @@ $(function() {
 				});
 				pushObj.push({"drugname": tempDrug, "time": timeArr});
 			}
-			console.log(pushObj);
+            myDataRef.push(pushObj);
         }
     );
 });
+
+function getName(hi) {
+    location.href = 'file:///C:/Users/Alex/Documents/Hackathon/MizzouHackMed2014/index.html#';
+    console.log($(hi).text());
+    pageName = $(hi).text();
+    console.log('heeeeer');
+    console.log('here');
+    $( document ).ready( readyFn );
+}
+
+function readyFn () {
+    $("#userName").prepend('<div>Name</div>');
+}
 
 $(document).ready(function() {
     var max_fields      = 10; //maximum input boxes allowed
@@ -72,17 +72,33 @@ $(document).ready(function() {
 		drugNum++;
 		var myClass = "drugname"+drugNum;
 		var timeClass = "time"+drugNum;
-		$(drugnamewrapper).append('<div class =' + myClass + '><input type="text" class=' +myClass+' placeholder = "Drug Name"/><input type="text" class='+ timeClass +' placeholder="Time"><a href="#" class="remove_field">Remove</a></div>'); //add input box    
+		$(drugnamewrapper).append('<div class =' + myClass + '><input type="text" class="' +myClass+' inputMargin form-control inline" placeholder = "Drug Name"/><input type="text" class="'+ timeClass +' inputMargin form-control inline" placeholder="Time"><a href="#" class="remove_field">Remove</a></div>'); //add input box    
 	});
 	 
     $(".add_time_button").click(function(e){ //on add input button click
         e.preventDefault();
 		myClass = "time"+drugNum;
-	    $("div.drugname"+drugNum).append('<div><input type="text" class='+ myClass +'><a href="#" class="remove_field">Remove</a></div>'); //add input box
+	    $("div.drugname"+drugNum).append('<div class="indent"><input type="text" class="'+ myClass +' inputMargin form-control inline" placeholder="Time"><a href="#" class="remove_field">Remove</a></div>'); //add input box
 		
      });
 	
     $(drugwrapper).on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); x--;
-    })
+    });    
+
+    for(var i = 0; i<myList.length; i++){
+        $(".list").append('<tr><td href="#" onclick="getName(this)">'+ myList[i].name +'</td></tr>');
+    }
+
+    myDataRef.on('value', function (snapshot) {
+    console.log(snapshot.val());
+    var newArray = [];
+    for(var key in snapshot.val()) {
+        if(snapshot.val().hasOwnProperty(key)) {
+            newArray.push(snapshot.val()[key]);
+        }
+    }
+    }, function (errorObject) {
+      console.log('The read failed: ' + errorObject.code);
+    });
 });
