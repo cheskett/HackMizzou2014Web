@@ -6,15 +6,17 @@ var myList = [
     {"name": "josh", "time": "1:00"}
 ];
 
-var myDataRef = new Firebase('https://tt1gfbgrp6u.firebaseio-demo.com/');
+var myDataRef = new Firebase('https://pill-reminder.firebaseio.com/');
 var drugNum = 0;
 var pageName;
-//myDataRef.remove();
+myDataRef.remove();
 
 $(function() {
     $("#save").click( function()
     {
 			var pushObj = [];
+			var name = $("#nameHeader").text()
+			var childDataRef = myDataRef.child(name)
 			for(var i =1; i<=drugNum; i++) {
 				var timeArr = [];
 				var tempDrug = $("input.drugname"+i).val();
@@ -25,13 +27,14 @@ $(function() {
 				});
 				pushObj.push({"drugname": tempDrug, "time": timeArr});
 			}
-            myDataRef.push(pushObj);
+            childDataRef.set({ name:name, drugs: pushObj});
         }
     );
 });
 
 function getName(hi) {
-    location.href = 'file:///C:/Users/Alex/Documents/Hackathon/MizzouHackMed2014/index.html#';
+    location.href = 'file:///A:/Cameron/Documents/GitHub/HackMizzou2014Web/index.html?'+$(hi).text().toUpperCase();
+
     console.log($(hi).text());
     pageName = $(hi).text();
     console.log('heeeeer');
@@ -44,6 +47,11 @@ function readyFn () {
 }
 
 $(document).ready(function() {
+
+	$("#nameHeader").html("<b>"+window.location.href.split('?')[1]+"</b>");
+
+	var name = $("#nameHeader").text();
+	
     var max_fields      = 10; //maximum input boxes allowed
     var drugwrapper     = $(".input_drugs_wrap"); //Fields wrapper
 	
