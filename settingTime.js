@@ -95,7 +95,7 @@ $(document).ready(function() {
     });    
 
     for(var i = 0; i<myList.length; i++){
-        $(".list").append('<tr><td href="#" onclick="getName(this)">'+ myList[i].name +'</td></tr>');
+        $(".list").append('<tr><td class="centerText" href="#" onclick="getName(this)"><h4>'+ myList[i].name +'</h4></td></tr>');
     }
 
     myDataRef.on('value', function (snapshot) {

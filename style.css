@@ -13,8 +13,19 @@
 }
 
 .tableSize {
-	width:200px;
-	height: 400px;
+	width:125px !important;
+	height: 300px !important;
 	overflow: auto;
+}
+.centerh {
+	width: 12%;
+	margin: auto;
+}
+.centerv {
+	height: 5%;
+	padding-top: 13%;
+}
+.centerText {
+	padding-left: 48% !important;
 }
 
